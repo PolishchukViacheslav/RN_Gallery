@@ -7,44 +7,12 @@
  */
 
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-  Image,
-} from 'react-native';
-import { createStore, applyMiddleware } from 'redux';
+import { StyleSheet } from 'react-native';
 import { Provider } from 'react-redux';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { Main } from './Main';
-import thunk from 'redux-thunk';
-
-const initialState = {
-  gallery: [],
-  isLoading: false,
-};
-const SET_GALLERY = 'set_gallery';
-const set_gallery = (fotos) => ({
-  type: SET_GALLERY,
-  payload: fotos,
-});
-
-const rootReducer = (state = initialState, action) => {
-  return state;
-};
-
-const store = createStore(rootReducer, applyMiddleware(thunk));
-console.log(store);
+import { store } from './redux/store';
 
 const App = () => {
   return (

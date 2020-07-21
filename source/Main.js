@@ -9,7 +9,7 @@ import {
   Image,
 } from 'react-native';
 import { styles } from './App';
-import { FotoList } from './components/FotoList';
+import FotoList from './components/FotoList';
 
 export const Main = () => {
   // console.log('wertger');
@@ -20,7 +20,7 @@ export const Main = () => {
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
           contentContainerStyle={styles.scrollView}>
-          <FotoList style={styles.scrollView} />
+          <FotoList />
         </ScrollView>
       </SafeAreaView>
     </>
