@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-// import { Header } from 'react-native-elements';
 import { Foto } from './Foto';
+import { response } from '../API'
 
 const fotos = [
   {
@@ -140,10 +140,22 @@ export class FotoList extends React.Component {
     fotos: fotos,
   };
 
+  componentDidMount() {
+    this.getFotos();
+  }
+
+  getFotos = async () => {
+    const foto = await response();
+    this.setState({
+      fotos: foto,
+    });
+    console.log(foto);
+    return foto;
+  };
+
   render() {
     return (
       <>
-        {/* <Header centerComponent={{ text: 'MY TITLE' }} /> */}
         <View style={styles.container}>
           {this.state.fotos.map((foto) => (
             <Foto key={foto.id} styles={styles} foto={foto} />
