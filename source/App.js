@@ -13,14 +13,27 @@ import { Provider } from 'react-redux';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { Main } from './Main';
 import { store } from './redux/store';
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { FullScreenFoto } from './components/FullScreenFoto';
 
-const App = () => {
-  return (
-    <Provider store={store}>
-      <Main />
-    </Provider>
-  );
-};
+
+class App extends React.Component {
+  render() {
+    const Stack = createStackNavigator();
+    return (
+      <Provider store={store}>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen name="Gallery" component={Main} />
+            <Stack.Screen name="FullScreenFoto" component={FullScreenFoto} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Provider>
+    );
+  }
+}
 
 export const styles = StyleSheet.create({
   scrollView: {

@@ -11,7 +11,7 @@ import {
 import { styles } from './App';
 import FotoList from './components/FotoList';
 
-export const Main = () => {
+export const Main = (props) => {
   // console.log('wertger');
   return (
     <>
@@ -20,7 +20,7 @@ export const Main = () => {
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
           contentContainerStyle={styles.scrollView}>
-          <FotoList />
+          <FotoList navigation={props.navigation} />
         </ScrollView>
       </SafeAreaView>
     </>
