@@ -1,33 +1,16 @@
 import React, { PureComponent } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { View, Text } from 'react-native';
 import { Foto } from './Foto';
 import { getGallery } from '../redux/store';
 import { connect } from 'react-redux';
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-  },
-  tinyLogo: {
-    margin: 'auto',
-    width: 300,
-    height: 300,
-  },
-  logo: {
-    width: 66,
-    height: 58,
-  },
-  text: {
-    width: 300,
-  },
-});
+import { styles } from '../utils/utils';
 
 class FotoList extends PureComponent {
   componentDidMount() {
     this.props.getGallery();
   }
   render() {
-    const { fotos, loading } = this.props;
+    const { fotos, loading, navigation } = this.props;
 
     if (!loading) {
       return (
@@ -40,7 +23,7 @@ class FotoList extends PureComponent {
                   styles={styles}
                   foto={foto}
                   onPress={() =>
-                    this.props.navigation.navigate('FullScreenFoto', {
+                    navigation.navigate('FullScreenFoto', {
                       url: foto.urls.regular,
                     })
                   }
@@ -68,16 +51,3 @@ const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FotoList);
-// export const FotoList = (props) => {
-
-//   //useEffect
-
-//   const gallery = useSelector((state) => ({
-//     fotos: state.gallery,
-//     loading: state.loading,
-//   });
-
-//   const bindThunk = useDispatch();
-//   bindThunk(getGallery())
-
-//   return <div>{todo.text}</div>

@@ -1,12 +1,12 @@
 import React from 'react';
-import { Text, Image, Button, TouchableOpacity } from 'react-native';
+import { Text, Image, TouchableOpacity } from 'react-native';
 
 export const Foto = (props) => {
   const { styles, foto, onPress } = props;
   return (
     <TouchableOpacity onPress={onPress}>
       <Image
-        style={styles.tinyLogo}
+        style={styles.tinyFoto}
         source={{ uri: foto.urls.small }}
         onPress={onPress}
       />

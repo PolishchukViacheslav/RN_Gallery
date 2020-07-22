@@ -7,7 +7,7 @@ const GET_GALLERY = 'GET_GALLERY';
 const GET_GALLERY_FULFILLED = 'GET_GALLERY_FULFILLED';
 const GET_GALLERY_REJECTED = 'GET_GALLERY_REJECTED';
 
-export const fetchData = (bool) => {
+export const setLoading = (bool) => {
   return {
     type: GET_GALLERY,
     payload: bool,
@@ -33,9 +33,16 @@ export const fetchDataRejected = (error) => {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_GALLERY:
-      return { ...state, loading: action.payload };
+      return {
+        ...state,
+        loading: action.payload,
+      };
     case GET_GALLERY_FULFILLED:
-      return { ...state, gallery: action.payload, loading: action.loading };
+      return {
+        ...state,
+        gallery: action.payload,
+        loading: action.loading,
+      };
     case GET_GALLERY_REJECTED:
       return {
         ...state,

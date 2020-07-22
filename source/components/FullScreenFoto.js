@@ -9,7 +9,7 @@ const style = {
   height: windowHeight,
 };
 
-export const FullScreenFoto = ({ route, navigation }) => {
+export const FullScreenFoto = ({ route }) => {
   const { url } = route.params;
   return <Image source={{ uri: url }} style={style} />;
 };
