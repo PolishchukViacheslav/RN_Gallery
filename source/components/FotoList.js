@@ -1,53 +1,43 @@
-import React, { PureComponent } from 'react';
+import React, { useEffect } from 'react';
 import { View, Text } from 'react-native';
 import { Foto } from './Foto';
 import { getGallery } from '../redux/store';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { styles } from '../utils/utils';
 
-class FotoList extends PureComponent {
-  componentDidMount() {
-    this.props.getGallery();
+export const FotoList = (props) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getGallery());
+  }, [dispatch]);
+  const gallery = useSelector((state) => ({
+    fotos: state.gallery,
+    loading: state.loading,
+  }));
+  if (!gallery.loading) {
+    return (
+      <>
+        <View style={styles.container}>
+          {gallery.fotos.length ? (
+            gallery.fotos.map((foto) => (
+              <Foto
+                key={foto.id}
+                styles={styles}
+                foto={foto}
+                onPress={() =>
+                  props.navigation.navigate('FullScreenFoto', {
+                    url: foto.urls.regular,
+                  })
+                }
+              />
+            ))
+          ) : (
+            <Text>No fotos</Text>
+          )}
+        </View>
+      </>
+    );
+  } else {
+    return <Text>Loading..........</Text>;
   }
-  render() {
-    const { fotos, loading, navigation } = this.props;
-
-    if (!loading) {
-      return (
-        <>
-          <View style={styles.container}>
-            {fotos.length ? (
-              fotos.map((foto) => (
-                <Foto
-                  key={foto.id}
-                  styles={styles}
-                  foto={foto}
-                  onPress={() =>
-                    navigation.navigate('FullScreenFoto', {
-                      url: foto.urls.regular,
-                    })
-                  }
-                />
-              ))
-            ) : (
-              <Text>No fotos</Text>
-            )}
-          </View>
-        </>
-      );
-    } else {
-      return <Text>Loading..........</Text>;
-    }
-  }
-}
-
-const mapStateToProps = (state) => ({
-  fotos: state.gallery,
-  loading: state.loading,
-});
-
-const mapDispatchToProps = {
-  getGallery,
 };
-
-export default connect(mapStateToProps, mapDispatchToProps)(FotoList);
