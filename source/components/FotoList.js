@@ -5,7 +5,7 @@ import { getGallery } from '../redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { styles } from '../utils/utils';
 
-export const FotoList = (props) => {
+const FotoList = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getGallery());
@@ -41,3 +41,5 @@ export const FotoList = (props) => {
     return <Text>Loading..........</Text>;
   }
 };
+
+export default FotoList;
